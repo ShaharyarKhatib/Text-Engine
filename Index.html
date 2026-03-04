@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Text Engine</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="nav">
+<div class="menu">☰</div>
+<div class="logo">TEXT ENGINE</div>
+<div class="icons">🌐 🅰 👤</div>
+</div>
+
+<div class="main">
+
+<div class="input-block">
+
+<div class="input-area">
+<p class="label">INPUT YOUR TEXT</p>
+<textarea id="inputText" placeholder="Start typing or paste your text here..."></textarea>
+</div>
+
+<div class="circle-panel">
+
+<p class="function">FUNCTION</p>
+
+<button onclick="encodeText()">ENCODE</button>
+<button onclick="decodeText()">DECODE</button>
+
+</div>
+
+</div>
+
+
+<div class="output-block">
+
+<p class="label">TRANSFORMED TEXT</p>
+
+<div class="output-wrapper">
+
+<textarea id="result" placeholder="Transformed result will appear here..." readonly></textarea>
+
+<button class="copy" onclick="copyText()">COPY</button>
+
+</div>
+
+</div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
