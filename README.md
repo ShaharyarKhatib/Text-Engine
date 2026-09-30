@@ -2,7 +2,7 @@
 
 > A lightweight browser-based text transformation tool for encoding and decoding text using a custom transformation algorithm.
 
-🌐 **Live Demo:** `https://YOUR-USERNAME.github.io/YOUR-REPOSITORY/`
+🌐 **Live Demo:** https://shaharyarkhatib.github.io/Text-Engine/
 
 ---
 
