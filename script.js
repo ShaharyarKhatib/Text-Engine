@@ -1,103 +1,303 @@
-function encodeText(){
+```javascript
+const inputText = document.getElementById("inputText");
+const result = document.getElementById("result");
 
-let text=document.getElementById("inputText").value;
-let result="";
 
-for(let i=0;i<text.length;i++){
+// ===============================
+// ENCODE
+// ===============================
 
-let c=text[i];
+function encodeText() {
 
-if(c>='a' && c<='z'){
-result+=String.fromCharCode(((c.charCodeAt(0)-97+6)%26)+97);
+    let text = inputText.value;
+    let resultText = "";
+
+    for (let i = 0; i < text.length; i++) {
+
+        let c = text[i];
+
+        // Lowercase letters
+        if (c >= 'a' && c <= 'z') {
+
+            resultText += String.fromCharCode(
+                ((c.charCodeAt(0) - 97 + 6) % 26) + 97
+            );
+
+        }
+
+        // Uppercase letters
+        else if (c >= 'A' && c <= 'Z') {
+
+            resultText += String.fromCharCode(
+                ((c.charCodeAt(0) - 65 + 6) % 26) + 65
+            );
+
+        }
+
+        // Numbers
+        else if (c == '1') resultText += ".g.";
+        else if (c == '2') resultText += ".h.";
+        else if (c == '3') resultText += ".i.";
+        else if (c == '4') resultText += ".j.";
+        else if (c == '5') resultText += ".k.";
+        else if (c == '6') resultText += ".l.";
+        else if (c == '7') resultText += ".m.";
+        else if (c == '8') resultText += ".n.";
+        else if (c == '9') resultText += ".o.";
+        else if (c == '0') resultText += ".p.";
+
+        // Special characters
+        else if (c == '@') resultText += "6";
+        else if (c == '!') resultText += "5";
+        else if (c == '#') resultText += "7";
+        else if (c == '$') resultText += "8";
+        else if (c == '&') resultText += "9";
+        else if (c == '*') resultText += "10";
+
+        // Space and dot
+        else if (c == ' ') resultText += "2";
+        else if (c == '.') resultText += "3";
+
+        // Other characters remain unchanged
+        else resultText += c;
+    }
+
+    result.value = resultText;
+
+    updateCounters();
+
+    const status = document.querySelector(".result-status");
+
+    if (status) {
+        status.textContent = "● Encoding complete";
+    }
 }
 
-else if(c>='A' && c<='Z'){
-result+=String.fromCharCode(((c.charCodeAt(0)-65+6)%26)+65);
+
+// ===============================
+// DECODE
+// ===============================
+
+function decodeText() {
+
+    let text = inputText.value;
+    let resultText = "";
+    let i = 0;
+
+    while (i < text.length) {
+
+        // Numbers
+        if (text.substring(i, i + 3) === ".g.") {
+            resultText += "1";
+            i += 3;
+        }
+
+        else if (text.substring(i, i + 3) === ".h.") {
+            resultText += "2";
+            i += 3;
+        }
+
+        else if (text.substring(i, i + 3) === ".i.") {
+            resultText += "3";
+            i += 3;
+        }
+
+        else if (text.substring(i, i + 3) === ".j.") {
+            resultText += "4";
+            i += 3;
+        }
+
+        else if (text.substring(i, i + 3) === ".k.") {
+            resultText += "5";
+            i += 3;
+        }
+
+        else if (text.substring(i, i + 3) === ".l.") {
+            resultText += "6";
+            i += 3;
+        }
+
+        else if (text.substring(i, i + 3) === ".m.") {
+            resultText += "7";
+            i += 3;
+        }
+
+        else if (text.substring(i, i + 3) === ".n.") {
+            resultText += "8";
+            i += 3;
+        }
+
+        else if (text.substring(i, i + 3) === ".o.") {
+            resultText += "9";
+            i += 3;
+        }
+
+        else if (text.substring(i, i + 3) === ".p.") {
+            resultText += "0";
+            i += 3;
+        }
+
+        // *
+        else if (text.substring(i, i + 2) === "10") {
+            resultText += "*";
+            i += 2;
+        }
+
+        // Special characters
+        else if (text[i] === '6') {
+            resultText += "@";
+            i++;
+        }
+
+        else if (text[i] === '5') {
+            resultText += "!";
+            i++;
+        }
+
+        else if (text[i] === '7') {
+            resultText += "#";
+            i++;
+        }
+
+        else if (text[i] === '8') {
+            resultText += "$";
+            i++;
+        }
+
+        else if (text[i] === '9') {
+            resultText += "&";
+            i++;
+        }
+
+        // Space
+        else if (text[i] === '2') {
+            resultText += " ";
+            i++;
+        }
+
+        // Dot
+        else if (text[i] === '3') {
+            resultText += ".";
+            i++;
+        }
+
+        // Lowercase
+        else if (text[i] >= 'a' && text[i] <= 'z') {
+
+            resultText += String.fromCharCode(
+                ((text.charCodeAt(i) - 97 - 6 + 26) % 26) + 97
+            );
+
+            i++;
+        }
+
+        // Uppercase
+        else if (text[i] >= 'A' && text[i] <= 'Z') {
+
+            resultText += String.fromCharCode(
+                ((text.charCodeAt(i) - 65 - 6 + 26) % 26) + 65
+            );
+
+            i++;
+        }
+
+        // Other characters
+        else {
+
+            resultText += text[i];
+            i++;
+        }
+    }
+
+    result.value = resultText;
+
+    updateCounters();
+
+    const status = document.querySelector(".result-status");
+
+    if (status) {
+        status.textContent = "● Decoding complete";
+    }
 }
 
-else if(c=='1') result+=".g.";
-else if(c=='2') result+=".h.";
-else if(c=='3') result+=".i.";
-else if(c=='4') result+=".j.";
-else if(c=='5') result+=".k.";
-else if(c=='6') result+=".l.";
-else if(c=='7') result+=".m.";
-else if(c=='8') result+=".n.";
-else if(c=='9') result+=".o.";
-else if(c=='0') result+=".p.";
 
-else if(c=='@') result+="6";
-else if(c=='!') result+="5";
-else if(c=='#') result+="7";
-else if(c=='$') result+="8";
-else if(c=='&') result+="9";
-else if(c=='*') result+="10";
+// ===============================
+// COPY
+// ===============================
 
-else if(c==' ') result+="2";
-else if(c=='.') result+="3";
+function copyText() {
 
-else result+=c;
+    if (!result.value) return;
 
+    navigator.clipboard.writeText(result.value);
+
+    const button = document.querySelector(".copy-btn");
+
+    if (button) {
+
+        button.innerHTML = "✓ COPIED";
+
+        setTimeout(() => {
+
+            button.innerHTML = "<span>⧉</span> COPY";
+
+        }, 1500);
+    }
 }
 
-document.getElementById("result").value=result;
 
+// ===============================
+// CLEAR
+// ===============================
+
+function clearInput() {
+
+    inputText.value = "";
+    result.value = "";
+
+    updateCounters();
+
+    const status = document.querySelector(".result-status");
+
+    if (status) {
+        status.textContent = "● Waiting for input";
+    }
 }
 
-function decodeText(){
 
-let text=document.getElementById("inputText").value;
-let result="";
-let i=0;
+// ===============================
+// CHARACTER COUNTER
+// ===============================
 
-while(i<text.length){
+function updateCounters() {
 
-if(text.substring(i,i+3)===".g."){result+="1";i+=3;}
-else if(text.substring(i,i+3)===".h."){result+="2";i+=3;}
-else if(text.substring(i,i+3)===".i."){result+="3";i+=3;}
-else if(text.substring(i,i+3)===".j."){result+="4";i+=3;}
-else if(text.substring(i,i+3)===".k."){result+="5";i+=3;}
-else if(text.substring(i,i+3)===".l."){result+="6";i+=3;}
-else if(text.substring(i,i+3)===".m."){result+="7";i+=3;}
-else if(text.substring(i,i+3)===".n."){result+="8";i+=3;}
-else if(text.substring(i,i+3)===".o."){result+="9";i+=3;}
-else if(text.substring(i,i+3)===".p."){result+="0";i+=3;}
+    const inputCounter =
+        document.getElementById("inputCount");
 
-else if(text.substring(i,i+2)=="10"){result+="*";i+=2;}
+    const outputCounter =
+        document.getElementById("outputCount");
 
-else if(text[i]=='6'){result+="@";i++;}
-else if(text[i]=='5'){result+="!";i++;}
-else if(text[i]=='7'){result+="#";i++;}
-else if(text[i]=='8'){result+="$";i++;}
-else if(text[i]=='9'){result+="&";i++;}
+    if (inputCounter) {
 
-else if(text[i]=='2'){result+=" ";i++;}
-else if(text[i]=='3'){result+=".";i++;}
+        inputCounter.textContent =
+            `${inputText.value.length} characters`;
+    }
 
-else if(text[i]>='a' && text[i]<='z'){
-result+=String.fromCharCode(((text.charCodeAt(i)-97-6+26)%26)+97);
-i++;
+    if (outputCounter) {
+
+        outputCounter.textContent =
+            `${result.value.length} characters`;
+    }
 }
 
-else if(text[i]>='A' && text[i]<='Z'){
-result+=String.fromCharCode(((text.charCodeAt(i)-65-6+26)%26)+65);
-i++;
-}
 
-else{
-result+=text[i];
-i++;
-}
+// ===============================
+// LIVE INPUT COUNTER
+// ===============================
 
-}
+inputText.addEventListener("input", updateCounters);
 
-document.getElementById("result").value=result;
 
-}
-
-function copyText(){
-
-let text=document.getElementById("result");
-navigator.clipboard.writeText(text.value);
-
-}
+// Initial counter
+updateCounters();
+```
