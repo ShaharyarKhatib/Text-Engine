@@ -6,7 +6,7 @@
 <title>Text Engine</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 
@@ -31,32 +31,28 @@
 
 <main class="main">
 
-  <section class="input-block">
-
-    <div class="input-area glass">
-      <label class="label" for="inputText">Input your text</label>
-      <textarea id="inputText" placeholder="Start typing or paste your text here..." spellcheck="false"></textarea>
-      <div class="foot">
-        <span id="inCount">0 characters</span>
-        <button type="button" class="ghost" id="btnClear">Clear</button>
-      </div>
+  <section class="panel input-area">
+    <label class="label" for="inputText">Input your text</label>
+    <textarea id="inputText" placeholder="Start typing or paste your text here..." spellcheck="false"></textarea>
+    <div class="foot">
+      <span id="inCount">0 characters</span>
+      <button type="button" class="ghost" id="btnClear">Clear</button>
     </div>
-
-    <div class="circle-panel" role="group" aria-label="Function">
-      <p class="function">Function</p>
-      <button id="btnEncode" onclick="encodeText()">Encode</button>
-      <button id="btnDecode" onclick="decodeText()">Decode</button>
-    </div>
-
   </section>
 
-  <section class="output-block glass">
-    <div class="head">
-      <label class="label" for="result">Transformed text</label>
+  <div class="circle-panel" role="group" aria-label="Function">
+    <p class="function">Function</p>
+    <button id="btnEncode" onclick="encodeText()">Encode</button>
+    <button id="btnDecode" onclick="decodeText()">Decode</button>
+  </div>
+
+  <section class="panel output-area">
+    <label class="label" for="result">Transformed text</label>
+    <textarea id="result" placeholder="Transformed result will appear here..." readonly spellcheck="false"></textarea>
+    <div class="foot">
+      <span id="outCount">0 characters</span>
       <button class="copy" id="btnCopy" onclick="copyText()">Copy</button>
     </div>
-    <textarea id="result" placeholder="Transformed result will appear here..." readonly spellcheck="false"></textarea>
-    <div class="foot"><span id="outCount">0 characters</span></div>
   </section>
 
 </main>
