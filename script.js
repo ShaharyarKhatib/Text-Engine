@@ -44,8 +44,6 @@ document.getElementById("result").value=result;
 
 }
 
-
-
 function decodeText(){
 
 let text=document.getElementById("inputText").value;
@@ -97,12 +95,9 @@ document.getElementById("result").value=result;
 
 }
 
-
-
 function copyText(){
 
 let text=document.getElementById("result");
 navigator.clipboard.writeText(text.value);
-
 
 }
