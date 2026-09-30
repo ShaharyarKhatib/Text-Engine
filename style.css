@@ -1,194 +1,222 @@
-*{
-box-sizing:border-box;
-font-family:Arial, Helvetica, sans-serif;
+/* Text Engine - glass / aurora theme */
+
+:root{
+  --ink:#1d1740;
+  --muted:#5d5a7a;
+  --glass:rgba(255,255,255,.52);
+  --glass-strong:rgba(255,255,255,.72);
+  --edge:rgba(255,255,255,.75);
+  --shadow:0 24px 50px -24px rgba(70,35,130,.45);
+  --a1:#5b5bff;
+  --a2:#b14cff;
+  --focus:#5b5bff;
+  --bg:#f5f1ff;
+  --mesh:
+    radial-gradient(55% 50% at 12% 8%, #f2a4ee 0, transparent 62%),
+    radial-gradient(50% 55% at 92% 18%, #a9e9cf 0, transparent 62%),
+    radial-gradient(60% 60% at 55% 105%, #b7c3ff 0, transparent 62%);
+  --sans:"Outfit",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
 }
+
+@media (prefers-color-scheme:dark){
+  :root{
+    --ink:#f1eeff;
+    --muted:#b5b0d6;
+    --glass:rgba(34,26,68,.55);
+    --glass-strong:rgba(46,36,90,.75);
+    --edge:rgba(255,255,255,.14);
+    --shadow:0 24px 50px -24px rgba(0,0,0,.7);
+    --a1:#7d7dff;
+    --a2:#c574ff;
+    --focus:#9c9cff;
+    --bg:#140f2a;
+    --mesh:
+      radial-gradient(55% 50% at 12% 8%, rgba(190,70,190,.55) 0, transparent 62%),
+      radial-gradient(50% 55% at 92% 18%, rgba(60,170,140,.45) 0, transparent 62%),
+      radial-gradient(60% 60% at 55% 105%, rgba(80,90,220,.5) 0, transparent 62%);
+  }
+}
+
+*{box-sizing:border-box}
 
 body{
-margin:0;
-height:100vh;
-display:flex;
-flex-direction:column;
-align-items:center;
-
-background:linear-gradient(120deg,#e98de4,#a9e9cf);
-animation:bgMove 10s ease infinite alternate;
+  margin:0;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  color:var(--ink);
+  font-family:var(--sans);
+  background:var(--mesh),var(--bg);
+  background-attachment:fixed;
 }
 
-/* subtle background animation */
+button,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
 
-@keyframes bgMove{
-from{background-position:left;}
-to{background-position:right;}
+.glass{
+  background:var(--glass);
+  border:1px solid var(--edge);
+  border-radius:24px;
+  box-shadow:var(--shadow);
+  -webkit-backdrop-filter:blur(20px) saturate(160%);
+  backdrop-filter:blur(20px) saturate(160%);
 }
-
 
 /* NAVBAR */
 
 .nav{
-margin-top:20px;
-width:80%;
-padding:14px 30px;
-border-radius:30px;
-
-background:#e6eef4;
-
-display:flex;
-justify-content:space-between;
-align-items:center;
-
-box-shadow:
-8px 8px 16px rgba(0,0,0,0.15),
--8px -8px 16px white;
+  margin-top:20px;
+  width:min(1000px,92%);
+  padding:10px 14px;
+  border-radius:999px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:var(--glass);
+  border:1px solid var(--edge);
+  box-shadow:var(--shadow);
+  -webkit-backdrop-filter:blur(20px) saturate(160%);
+  backdrop-filter:blur(20px) saturate(160%);
 }
 
-.logo{
-letter-spacing:4px;
-color:#444;
-}
+.logo{font-size:1.25rem;font-weight:600;letter-spacing:-.01em}
+.icons{display:flex;gap:4px}
 
+.icon-btn{
+  width:42px;height:42px;
+  display:grid;place-items:center;
+  border:0;border-radius:50%;
+  background:transparent;
+  cursor:pointer;
+}
+.icon-btn:hover{background:var(--glass-strong)}
+.icon-btn svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 
 /* MAIN LAYOUT */
 
 .main{
-width:900px;
-margin-top:40px;
+  width:min(1000px,92%);
+  margin:36px 0 56px;
+  display:flex;
+  flex-direction:column;
+  gap:28px;
 }
-
-
-/* INPUT SECTION */
 
 .input-block{
-display:flex;
-gap:40px;
-align-items:center;
+  display:grid;
+  grid-template-columns:1fr 250px;
+  gap:40px;
+  align-items:center;
 }
 
-.label{
-font-size:15px;
-color:#555;
-margin-bottom:8px;
-}
+.input-area,.output-block{padding:18px 20px 14px;display:flex;flex-direction:column;gap:10px}
+
+.label{font-size:1rem;font-weight:500;color:var(--muted)}
+.head{display:flex;align-items:center;justify-content:space-between;gap:12px}
 
 textarea{
-width:420px;
-height:120px;
-border:none;
-outline:none;
-resize:none;
-border-radius:20px;
-
-padding:18px;
-
-background:#e6eef4;
-
-box-shadow:
-inset 6px 6px 10px rgba(0,0,0,0.15),
-inset -6px -6px 10px white;
-
-transition:0.3s;
+  width:100%;
+  border:0;
+  outline:none;
+  resize:none;
+  border-radius:16px;
+  padding:16px;
+  font-family:var(--mono);
+  font-size:.95rem;
+  line-height:1.6;
+  background:var(--glass-strong);
+  box-shadow:inset 0 2px 8px rgba(60,30,120,.12);
+  transition:box-shadow .25s;
 }
+#inputText{height:150px}
+#result{height:130px}
+textarea::placeholder{color:var(--muted);opacity:.75}
+textarea:focus{box-shadow:inset 0 2px 8px rgba(60,30,120,.12),0 0 0 3px var(--focus)}
 
-textarea:focus{
-transform:scale(1.02);
+.foot{display:flex;justify-content:space-between;align-items:center;font-size:.88rem;color:var(--muted);min-height:32px}
+
+.ghost{
+  border:1px solid var(--edge);
+  background:transparent;
+  border-radius:999px;
+  padding:5px 14px;
+  font-weight:500;
+  cursor:pointer;
 }
-
+.ghost:hover{background:var(--glass-strong)}
 
 /* FUNCTION CIRCLE */
 
 .circle-panel{
-
-width:230px;
-height:230px;
-border-radius:50%;
-
-background:#e6eef4;
-
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-margin-left: 100px;
-
-box-shadow:
-10px 10px 20px rgba(0,0,0,0.15),
--10px -10px 20px white;
-
-animation:float 3s ease-in-out infinite;
+  position:relative;
+  width:250px;height:250px;
+  justify-self:center;
+  border-radius:50%;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:10px;
+  background:var(--glass);
+  box-shadow:var(--shadow);
+  -webkit-backdrop-filter:blur(20px) saturate(160%);
+  backdrop-filter:blur(20px) saturate(160%);
 }
 
-@keyframes float{
-0%{transform:translateY(0px);}
-50%{transform:translateY(-15px);}
-100%{transform:translateY(0px);}
+.circle-panel::before{
+  content:"";
+  position:absolute;inset:0;
+  border-radius:50%;
+  background:conic-gradient(from 0deg,var(--a1),var(--a2),#5fe0c0,var(--a1));
+  -webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 4px),#000 calc(100% - 3px));
+  mask:radial-gradient(farthest-side,transparent calc(100% - 4px),#000 calc(100% - 3px));
+  animation:spin 9s linear infinite;
 }
+@keyframes spin{to{transform:rotate(360deg)}}
 
-.function{
-font-size:13px;
-color:#666;
-margin-bottom:10px;
-}
-
-
-/* BUTTONS */
+.function{margin:0 0 4px;font-size:.95rem;font-weight:500;color:var(--muted)}
 
 .circle-panel button{
-
-margin:8px;
-padding:10px 30px;
-
-border:none;
-border-radius:25px;
-
-font-weight:bold;
-
-background:linear-gradient(90deg,#7bdad3,#74d4f3);
-
-box-shadow:
-4px 4px 10px rgba(0,0,0,0.2),
--4px -4px 10px white;
-
-cursor:pointer;
-
-transition:0.3s;
+  width:150px;
+  padding:11px 0;
+  border:1px solid var(--edge);
+  border-radius:999px;
+  font-weight:600;
+  background:var(--glass-strong);
+  cursor:pointer;
+  transition:transform .2s,background .2s,color .2s;
+}
+.circle-panel button:hover{transform:translateY(-2px)}
+.circle-panel button.active{
+  color:#fff;
+  border-color:transparent;
+  background:linear-gradient(90deg,var(--a1),var(--a2));
 }
 
-.circle-panel button:hover{
-transform:scale(1.08);
-}
-
-
-/* OUTPUT SECTION */
-
-.output-block{
-margin-top:40px;
-}
-
-.output-wrapper{
-display:flex;
-align-items:center;
-gap:20px;
-}
+/* COPY BUTTON */
 
 .copy{
+  padding:9px 24px;
+  border:0;
+  border-radius:999px;
+  color:#fff;
+  font-weight:600;
+  background:linear-gradient(90deg,var(--a1),var(--a2));
+  box-shadow:0 10px 20px -10px var(--a2);
+  cursor:pointer;
+  transition:transform .2s;
+}
+.copy:hover{transform:translateY(-2px)}
+.copy.done{background:linear-gradient(90deg,#1fae8a,#5fe0c0);box-shadow:0 10px 20px -10px #1fae8a}
 
-padding:10px 25px;
-border:none;
-border-radius:25px;
+/* RESPONSIVE */
 
-color:rgb(243, 242, 242);
-font-weight:bold;
-
-background:linear-gradient(90deg,#1f3c88,#8e2de2);
-
-box-shadow:
-4px 4px 10px rgba(0,0,0,0.2),
--4px -4px 10px white;
-
-cursor:pointer;
-
-transition:0.3s;
+@media (max-width:760px){
+  .input-block{grid-template-columns:1fr;gap:26px}
+  .circle-panel{width:220px;height:220px}
+  .circle-panel button{width:130px}
 }
 
-.copy:hover{
-transform:scale(1.08);
+@media (prefers-reduced-motion:reduce){
+  .circle-panel::before{animation:none}
+  *{transition:none!important}
 }
