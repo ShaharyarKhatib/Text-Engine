@@ -1,68 +1,72 @@
-```javascript
-const inputText = document.getElementById("inputText");
+const input = document.getElementById("inputText");
 const result = document.getElementById("result");
 
 
-// ===============================
+// ==========================================
 // ENCODE
-// ===============================
+// ==========================================
 
 function encodeText() {
 
-    let text = inputText.value;
-    let resultText = "";
+    let text = input.value;
+    let encoded = "";
+
+    if (!text.trim()) {
+        result.value = "";
+        updateCounters();
+        return;
+    }
 
     for (let i = 0; i < text.length; i++) {
 
         let c = text[i];
 
-        // Lowercase letters
+        // Letters
         if (c >= 'a' && c <= 'z') {
 
-            resultText += String.fromCharCode(
+            encoded += String.fromCharCode(
                 ((c.charCodeAt(0) - 97 + 6) % 26) + 97
             );
 
         }
 
-        // Uppercase letters
         else if (c >= 'A' && c <= 'Z') {
 
-            resultText += String.fromCharCode(
+            encoded += String.fromCharCode(
                 ((c.charCodeAt(0) - 65 + 6) % 26) + 65
             );
 
         }
 
         // Numbers
-        else if (c == '1') resultText += ".g.";
-        else if (c == '2') resultText += ".h.";
-        else if (c == '3') resultText += ".i.";
-        else if (c == '4') resultText += ".j.";
-        else if (c == '5') resultText += ".k.";
-        else if (c == '6') resultText += ".l.";
-        else if (c == '7') resultText += ".m.";
-        else if (c == '8') resultText += ".n.";
-        else if (c == '9') resultText += ".o.";
-        else if (c == '0') resultText += ".p.";
+        else if (c == '1') encoded += ".g.";
+        else if (c == '2') encoded += ".h.";
+        else if (c == '3') encoded += ".i.";
+        else if (c == '4') encoded += ".j.";
+        else if (c == '5') encoded += ".k.";
+        else if (c == '6') encoded += ".l.";
+        else if (c == '7') encoded += ".m.";
+        else if (c == '8') encoded += ".n.";
+        else if (c == '9') encoded += ".o.";
+        else if (c == '0') encoded += ".p.";
 
         // Special characters
-        else if (c == '@') resultText += "6";
-        else if (c == '!') resultText += "5";
-        else if (c == '#') resultText += "7";
-        else if (c == '$') resultText += "8";
-        else if (c == '&') resultText += "9";
-        else if (c == '*') resultText += "10";
+        else if (c == '@') encoded += "6";
+        else if (c == '!') encoded += "5";
+        else if (c == '#') encoded += "7";
+        else if (c == '$') encoded += "8";
+        else if (c == '&') encoded += "9";
+        else if (c == '*') encoded += "10";
 
         // Space and dot
-        else if (c == ' ') resultText += "2";
-        else if (c == '.') resultText += "3";
+        else if (c == ' ') encoded += "2";
+        else if (c == '.') encoded += "3";
 
-        // Other characters remain unchanged
-        else resultText += c;
+        // Other characters
+        else encoded += c;
     }
 
-    result.value = resultText;
+    result.value = encoded;
 
     updateCounters();
 
@@ -74,117 +78,123 @@ function encodeText() {
 }
 
 
-// ===============================
+// ==========================================
 // DECODE
-// ===============================
+// ==========================================
 
 function decodeText() {
 
-    let text = inputText.value;
-    let resultText = "";
+    let text = input.value;
+    let decoded = "";
     let i = 0;
+
+    if (!text.trim()) {
+        result.value = "";
+        updateCounters();
+        return;
+    }
 
     while (i < text.length) {
 
         // Numbers
-        if (text.substring(i, i + 3) === ".g.") {
-            resultText += "1";
+        if (text.substring(i, i + 3) == ".g.") {
+            decoded += "1";
             i += 3;
         }
 
-        else if (text.substring(i, i + 3) === ".h.") {
-            resultText += "2";
+        else if (text.substring(i, i + 3) == ".h.") {
+            decoded += "2";
             i += 3;
         }
 
-        else if (text.substring(i, i + 3) === ".i.") {
-            resultText += "3";
+        else if (text.substring(i, i + 3) == ".i.") {
+            decoded += "3";
             i += 3;
         }
 
-        else if (text.substring(i, i + 3) === ".j.") {
-            resultText += "4";
+        else if (text.substring(i, i + 3) == ".j.") {
+            decoded += "4";
             i += 3;
         }
 
-        else if (text.substring(i, i + 3) === ".k.") {
-            resultText += "5";
+        else if (text.substring(i, i + 3) == ".k.") {
+            decoded += "5";
             i += 3;
         }
 
-        else if (text.substring(i, i + 3) === ".l.") {
-            resultText += "6";
+        else if (text.substring(i, i + 3) == ".l.") {
+            decoded += "6";
             i += 3;
         }
 
-        else if (text.substring(i, i + 3) === ".m.") {
-            resultText += "7";
+        else if (text.substring(i, i + 3) == ".m.") {
+            decoded += "7";
             i += 3;
         }
 
-        else if (text.substring(i, i + 3) === ".n.") {
-            resultText += "8";
+        else if (text.substring(i, i + 3) == ".n.") {
+            decoded += "8";
             i += 3;
         }
 
-        else if (text.substring(i, i + 3) === ".o.") {
-            resultText += "9";
+        else if (text.substring(i, i + 3) == ".o.") {
+            decoded += "9";
             i += 3;
         }
 
-        else if (text.substring(i, i + 3) === ".p.") {
-            resultText += "0";
+        else if (text.substring(i, i + 3) == ".p.") {
+            decoded += "0";
             i += 3;
         }
 
         // *
-        else if (text.substring(i, i + 2) === "10") {
-            resultText += "*";
+        else if (text.substring(i, i + 2) == "10") {
+            decoded += "*";
             i += 2;
         }
 
         // Special characters
-        else if (text[i] === '6') {
-            resultText += "@";
+        else if (text[i] == '6') {
+            decoded += "@";
             i++;
         }
 
-        else if (text[i] === '5') {
-            resultText += "!";
+        else if (text[i] == '5') {
+            decoded += "!";
             i++;
         }
 
-        else if (text[i] === '7') {
-            resultText += "#";
+        else if (text[i] == '7') {
+            decoded += "#";
             i++;
         }
 
-        else if (text[i] === '8') {
-            resultText += "$";
+        else if (text[i] == '8') {
+            decoded += "$";
             i++;
         }
 
-        else if (text[i] === '9') {
-            resultText += "&";
+        else if (text[i] == '9') {
+            decoded += "&";
             i++;
         }
 
         // Space
-        else if (text[i] === '2') {
-            resultText += " ";
+        else if (text[i] == '2') {
+            decoded += " ";
             i++;
         }
 
         // Dot
-        else if (text[i] === '3') {
-            resultText += ".";
+        else if (text[i] == '3') {
+            decoded += ".";
             i++;
         }
 
         // Lowercase
         else if (text[i] >= 'a' && text[i] <= 'z') {
 
-            resultText += String.fromCharCode(
+            decoded += String.fromCharCode(
                 ((text.charCodeAt(i) - 97 - 6 + 26) % 26) + 97
             );
 
@@ -194,7 +204,7 @@ function decodeText() {
         // Uppercase
         else if (text[i] >= 'A' && text[i] <= 'Z') {
 
-            resultText += String.fromCharCode(
+            decoded += String.fromCharCode(
                 ((text.charCodeAt(i) - 65 - 6 + 26) % 26) + 65
             );
 
@@ -204,12 +214,12 @@ function decodeText() {
         // Other characters
         else {
 
-            resultText += text[i];
+            decoded += text[i];
             i++;
         }
     }
 
-    result.value = resultText;
+    result.value = decoded;
 
     updateCounters();
 
@@ -221,9 +231,9 @@ function decodeText() {
 }
 
 
-// ===============================
+// ==========================================
 // COPY
-// ===============================
+// ==========================================
 
 function copyText() {
 
@@ -238,21 +248,19 @@ function copyText() {
         button.innerHTML = "✓ COPIED";
 
         setTimeout(() => {
-
             button.innerHTML = "<span>⧉</span> COPY";
-
         }, 1500);
     }
 }
 
 
-// ===============================
+// ==========================================
 // CLEAR
-// ===============================
+// ==========================================
 
 function clearInput() {
 
-    inputText.value = "";
+    input.value = "";
     result.value = "";
 
     updateCounters();
@@ -265,39 +273,33 @@ function clearInput() {
 }
 
 
-// ===============================
+// ==========================================
 // CHARACTER COUNTER
-// ===============================
+// ==========================================
 
 function updateCounters() {
 
-    const inputCounter =
-        document.getElementById("inputCount");
+    const inputCount = document.getElementById("inputCount");
+    const outputCount = document.getElementById("outputCount");
 
-    const outputCounter =
-        document.getElementById("outputCount");
-
-    if (inputCounter) {
-
-        inputCounter.textContent =
-            `${inputText.value.length} characters`;
+    if (inputCount) {
+        inputCount.textContent =
+            `${input.value.length} characters`;
     }
 
-    if (outputCounter) {
-
-        outputCounter.textContent =
+    if (outputCount) {
+        outputCount.textContent =
             `${result.value.length} characters`;
     }
 }
 
 
-// ===============================
+// ==========================================
 // LIVE INPUT COUNTER
-// ===============================
+// ==========================================
 
-inputText.addEventListener("input", updateCounters);
+input.addEventListener("input", updateCounters);
 
 
 // Initial counter
 updateCounters();
-```
