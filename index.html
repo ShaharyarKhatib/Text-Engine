@@ -1,57 +1,242 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Text Engine</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Text Engine</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<div class="nav">
-<div class="menu">☰</div>
-<div class="logo">TEXT ENGINE</div>
-<div class="icons">🌐  👤</div>
-</div>
+    <!-- Background -->
+    <div class="bg-grid"></div>
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
 
-<div class="main">
+    <!-- Navbar -->
+    <header class="navbar">
 
-<div class="input-block">
+        <div class="brand">
+            <div class="brand-icon">T</div>
+            <div>
+                <h1>TEXT<span>ENGINE</span></h1>
+                <small>Transform • Encode • Decode</small>
+            </div>
+        </div>
 
-<div class="input-area">
-<p class="label">INPUT YOUR TEXT</p>
-<textarea id="inputText" placeholder="Start typing or paste your text here..."></textarea>
-</div>
+        <div class="nav-right">
+            <span class="status">
+                <i></i> ENGINE ONLINE
+            </span>
 
-<div class="circle-panel">
+            <button class="icon-btn" title="Language">🌐</button>
+            <button class="profile-btn">👤</button>
+        </div>
 
-<p class="function">FUNCTION</p>
-
-<button onclick="encodeText()">ENCODE</button>
-<button onclick="decodeText()">DECODE</button>
-
-</div>
-
-</div>
+    </header>
 
 
-<div class="output-block">
+    <!-- Main -->
+    <main class="container">
 
-<p class="label">TRANSFORMED TEXT</p>
+        <!-- Hero -->
+        <section class="hero">
 
-<div class="output-wrapper">
+            <div class="badge">
+                <span></span>
+                SECURE TEXT PROCESSING
+            </div>
 
-<textarea id="result" placeholder="Transformed result will appear here..." readonly></textarea>
+            <h2>
+                Transform your text
+                <br>
+                <span>with precision.</span>
+            </h2>
 
-<button class="copy" onclick="copyText()">COPY</button>
+            <p>
+                Encode or decode your text instantly with our
+                fast and simple transformation engine.
+            </p>
 
-</div>
+        </section>
 
-</div>
 
-</div>
+        <!-- Engine -->
+        <section class="engine">
 
-<script src="script.js"></script>
+            <!-- Input -->
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <div>
+                        <span class="panel-number">01</span>
+                        <h3>Input Text</h3>
+                    </div>
+
+                    <span class="counter" id="inputCount">0 characters</span>
+
+                </div>
+
+                <textarea
+                    id="inputText"
+                    placeholder="Start typing or paste your text here..."
+                    spellcheck="false"
+                ></textarea>
+
+                <div class="panel-footer">
+
+                    <span>Ready for transformation</span>
+
+                    <button
+                        class="clear-btn"
+                        onclick="clearInput()">
+                        CLEAR
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- Controls -->
+            <div class="controls">
+
+                <div class="line"></div>
+
+                <div class="function-label">
+                    <span>FUNCTION</span>
+                </div>
+
+                <button
+                    class="action encode"
+                    onclick="encodeText()">
+
+                    <span class="action-icon">↗</span>
+
+                    <div>
+                        <strong>ENCODE</strong>
+                        <small>Transform text</small>
+                    </div>
+
+                </button>
+
+
+                <button
+                    class="action decode"
+                    onclick="decodeText()">
+
+                    <span class="action-icon">↙</span>
+
+                    <div>
+                        <strong>DECODE</strong>
+                        <small>Restore text</small>
+                    </div>
+
+                </button>
+
+                <div class="line"></div>
+
+            </div>
+
+
+            <!-- Output -->
+            <div class="panel output-panel">
+
+                <div class="panel-header">
+
+                    <div>
+                        <span class="panel-number">02</span>
+                        <h3>Transformed Text</h3>
+                    </div>
+
+                    <span class="counter" id="outputCount">
+                        0 characters
+                    </span>
+
+                </div>
+
+                <div class="output-area">
+
+                    <textarea
+                        id="result"
+                        placeholder="Your transformed result will appear here..."
+                        readonly
+                        spellcheck="false"
+                    ></textarea>
+
+                    <button
+                        class="copy-btn"
+                        onclick="copyText()">
+
+                        <span>⧉</span>
+                        COPY
+
+                    </button>
+
+                </div>
+
+                <div class="panel-footer">
+
+                    <span class="result-status">
+                        ● Waiting for input
+                    </span>
+
+                    <span>TEXT ENGINE v1.0</span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Features -->
+        <section class="features">
+
+            <div class="feature">
+                <div class="feature-icon">⚡</div>
+                <div>
+                    <strong>Instant Processing</strong>
+                    <p>Transform text in real time.</p>
+                </div>
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon">🔒</div>
+                <div>
+                    <strong>Private</strong>
+                    <p>Your text stays in your browser.</p>
+                </div>
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon">◎</div>
+                <div>
+                    <strong>Simple Interface</strong>
+                    <p>Focused and distraction free.</p>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+        <span>TEXT ENGINE</span>
+        <span>Built for fast text transformation</span>
+    </footer>
+
+
+    <script src="script.js"></script>
 
 </body>
-</html> improve and me best frontend
+</html>
