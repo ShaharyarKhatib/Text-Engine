@@ -2,56 +2,99 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Text Engine</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<div class="nav">
-<div class="menu">☰</div>
-<div class="logo">TEXT ENGINE</div>
-<div class="icons">🌐  👤</div>
-</div>
+<header class="nav">
+  <button class="icon-btn menu" aria-label="Open menu">
+    <svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+  </button>
 
-<div class="main">
+  <div class="logo">Text Engine</div>
 
-<div class="input-block">
+  <div class="icons">
+    <button class="icon-btn" aria-label="Language">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.5 3 14.5 0 18M12 3c-3 3.5-3 14.5 0 18"/></svg>
+    </button>
+    <button class="icon-btn" aria-label="Account">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.5-4 5-5 8-5s6.5 1 8 5"/></svg>
+    </button>
+  </div>
+</header>
 
-<div class="input-area">
-<p class="label">INPUT YOUR TEXT</p>
-<textarea id="inputText" placeholder="Start typing or paste your text here..."></textarea>
-</div>
+<main class="main">
 
-<div class="circle-panel">
+  <section class="input-block">
 
-<p class="function">FUNCTION</p>
+    <div class="input-area glass">
+      <label class="label" for="inputText">Input your text</label>
+      <textarea id="inputText" placeholder="Start typing or paste your text here..." spellcheck="false"></textarea>
+      <div class="foot">
+        <span id="inCount">0 characters</span>
+        <button type="button" class="ghost" id="btnClear">Clear</button>
+      </div>
+    </div>
 
-<button onclick="encodeText()">ENCODE</button>
-<button onclick="decodeText()">DECODE</button>
+    <div class="circle-panel" role="group" aria-label="Function">
+      <p class="function">Function</p>
+      <button id="btnEncode" onclick="encodeText()">Encode</button>
+      <button id="btnDecode" onclick="decodeText()">Decode</button>
+    </div>
 
-</div>
+  </section>
 
-</div>
+  <section class="output-block glass">
+    <div class="head">
+      <label class="label" for="result">Transformed text</label>
+      <button class="copy" id="btnCopy" onclick="copyText()">Copy</button>
+    </div>
+    <textarea id="result" placeholder="Transformed result will appear here..." readonly spellcheck="false"></textarea>
+    <div class="foot"><span id="outCount">0 characters</span></div>
+  </section>
 
+</main>
 
-<div class="output-block">
-
-<p class="label">TRANSFORMED TEXT</p>
-
-<div class="output-wrapper">
-
-<textarea id="result" placeholder="Transformed result will appear here..." readonly></textarea>
-
-<button class="copy" onclick="copyText()">COPY</button>
-
-</div>
-
-</div>
-
-</div>
-
+<!-- your cipher functions: encodeText(), decodeText(), copyText() -->
 <script src="script.js"></script>
+
+<!-- small UI helpers: counts, active button, copy feedback, clear -->
+<script>
+(function(){
+  var inp=document.getElementById("inputText"), out=document.getElementById("result");
+  var enc=document.getElementById("btnEncode"), dec=document.getElementById("btnDecode"), cp=document.getElementById("btnCopy");
+
+  function n(v){return v.length+(v.length===1?" character":" characters")}
+  function counts(){
+    document.getElementById("inCount").textContent=n(inp.value);
+    document.getElementById("outCount").textContent=n(out.value);
+  }
+  function active(b){
+    enc.classList.toggle("active",b===enc);
+    dec.classList.toggle("active",b===dec);
+  }
+
+  inp.addEventListener("input",counts);
+  enc.addEventListener("click",function(){active(enc);counts()});
+  dec.addEventListener("click",function(){active(dec);counts()});
+
+  cp.addEventListener("click",function(){
+    if(!out.value)return;
+    cp.textContent="Copied";cp.classList.add("done");
+    setTimeout(function(){cp.textContent="Copy";cp.classList.remove("done")},1400);
+  });
+
+  document.getElementById("btnClear").addEventListener("click",function(){
+    inp.value="";out.value="";active(null);counts();inp.focus();
+  });
+})();
+</script>
 
 </body>
 </html>
